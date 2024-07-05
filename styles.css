@@ -1,0 +1,102 @@
+/* Reset some default styles for better consistency */
+body, h2, h3, p, ul {
+    font-size: large;
+    font-style: italic;
+    margin: 0;
+    padding: 0;
+}
+body, h1{
+    font-size: xx-large;
+    font-style: initial;
+    margin: 0;
+    padding: auto;
+    
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('pharma2.jpg'); /* Replace 'your-background-image.jpg' with the path to your background image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    color: #333; /* Set text color for better visibility on the background */
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    min-height: 100vh; /* Ensure content takes at least the full viewport height */
+}
+
+.container {
+    width: 90%; /* Set a width for the medicine catalog container */
+    max-width: 1200px; /* Add a maximum width for larger screens */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Add a semi-transparent white background to the content area */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.cart-icon {
+    position: fixed;
+    top: 20px; /* Adjust as needed */
+    right: 20px; /* Adjust as needed */
+    z-index: 1000; /* Ensure it's above other content */
+    cursor: pointer; /* Make it look clickable */
+  }
+/* Style the medicine items */
+.medicine-item {
+    font-style: italic;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color:transparent;
+}
+
+/* Style the cart section */
+#cart {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    background-color: #fff;
+}
+
+/* Style the footer */
+footer {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 10px 0;
+}
+
+#created-by {
+    font-size: medium;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+#created-by p {
+    margin: 5px 0;
+}
+
+#created-by a {
+    font-style: italic;
+    color:black;
+    text-decoration: none;
+}
+
+/* Style links */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+img{
+    border-right-width: 20px;
+    padding: 0px 30px;
+}
