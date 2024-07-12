@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pharma System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Medicine Catalog</h1>
+    <a href="cart.html" class="cart-icon">
+      <!--Replace 'cart-icon.svg' with your icon file -->
+      <img src="vector-cart-icon.jpg" alt="Cart Icon" width="40px" height="40px">
+    </a>
+    <input type="text" id="searchInput" placeholder="Search...">
+    <select id="filterSelect">
+      <option value="">All</option>
+      <option value="painkiller">Painkillers</option>
+      <option value="antibacterial">antibacterial</option>
+      <option value="antiviral">antiviral</option>
+      <option value="anesthetics">anesthetics</option>
+      <option value="anti-allergics">anti-allergics</option>
+      <option value="anticonvulsants">anticonvulsants</option>
+      <option value="antifungal">antifungal</option>
+      <option value="bloodpressure">bloodpressure</option>
+      <option value="thyroxin">thyroxin</option>
+
+      <!-- Add more categories as needed -->
+    </select>
+
+
+    <!-- Add this cart section within the "medicineList" div -->
+    <div id="medicineList">
+      <!-- Medicine items will be dynamically added here -->
+    </div>
+    <div id="cart">
+      <h2>Shopping Cart / strip</h2>
+      <ul id="cartItems">
+        <!-- Cart items will be dynamically added here -->
+      </ul>
+      <p>Total: $<span id="cartTotal">0.00</span></p>
+    </div>
+    <div>
+
+      <button id="rzp-button1" class="btn btn-outline-dark btn-lg"><i class="fas fa-money-bill"></i> Own
+        Checkout</button>
+      <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+      <script>
+        var options = {
+          "key": "rzp_test_9XbJPu0vOzevBn", // Enter the Key ID generated from the Dashboard
+          "amount": "1000",
+          "currency": "INR",
+          "description": "Pharma",
+          "image": "example.com/image/rzp.jpg",
+          "prefill":
+          {
+            "email": "sakkatti0@gmail.com",
+            "contact": +919380765439,
+          },
+          config: {
+            display: {
+              blocks: {
+                utib: { //name for Axis block
+                  name: "Pay using Axis Bank",
+                  instruments: [
+                    {
+                      method: "card",
+                      issuers: ["UTIB"]
+                    },
+                    {
+                      method: "netbanking",
+                      banks: ["UTIB"]
+                    },
+                  ]
+                },
+                other: { //  name for other block
+                  name: "Other Payment modes",
+                  instruments: [
+                    {
+                      method: "card",
+                      issuers: ["ICIC"]
+                    },
+                    {
+                      method: 'netbanking',
+                    }
+                  ]
+                }
+              },
+              hide: [
+                {
+                  method: "upi"
+                }
+              ],
+              sequence: ["block.utib", "block.other"],
+              preferences: {
+                show_default_blocks: false // Should Checkout show its default blocks?
+              }
+            }
+          },
+          "handler": function (response) {
+            alert(response.razorpay_payment_id);
+          },
+          "modal": {
+            "ondismiss": function () {
+              if (confirm("Are you sure, you want to close the form?")) {
+                txt = "You pressed OK!";
+                console.log("Checkout form closed by the user");
+              } else {
+                txt = "You pressed Cancel!";
+                console.log("Complete the Payment")
+              }
+            }
+          }
+        };
+        var rzp1 = new Razorpay(options);
+        document.getElementById('rzp-button1').onclick = function (e) {
+          e.preventDefault();
+          rzp1.open();
+        }
+      </script>
+
+    </div>
+    <!-- Add this section at the bottom of your HTML body -->
+    <div id="created-by">
+      <p>Created by SAKSHI BHAVIKATTI</p>
+      <p>
+        LinkedIn : <a href="https://www.linkedin.com/in/sakshi-bhavikatti-b53a79255"
+          target="https://www.linkedin.com/in/sakshi-bhavikatti-b53a79255">https://www.linkedin.com/in/sakshi-bhavikatti-b53a79255:</a>
+      </p>
+      <p>Email :mailto:sakshibhavikatti04.com: <a href="mailto:sakshibhavikatti04.com">youremail@example.com</a></p>
+      <p> Mobile: 9380661585</p>
+    </div>
+    <!-- Medicine items will be dynamically added here -->
+  </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
