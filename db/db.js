@@ -4,8 +4,6 @@ import cors from 'cors';
 const app = express();
 const PORT = 3000;
 app.use(cors());
-app.use(express.json())
-
 const DB_URI = "mysql://avnadmin:AVNS_7YqTQq4L4D3q9ecJH4f@pharma-backende-ak0704176-bdd5.i.aivencloud.com:16165/pharmacy_management_system";
 const connection = mysql.createConnection(DB_URI);
 
