@@ -16,6 +16,12 @@ app.get('/api/medicine', (request ,response) => {
     });
 });
 
+app.get('/api/supplier', (request ,response) => {
+    const getSupplier = `SELECT * FROM supplier`;
+    connection.query(getSupplier ,(err, res) => {
+        return err ? response.sendStatus(400):response.status(200).json(res);
+    });
+});
 app.listen(PORT , () => {
     console.log("SERVER UP");
 });
