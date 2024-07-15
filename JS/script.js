@@ -12,14 +12,19 @@ const cartTotalSpan = document.getElementById("cartTotal");
 let cart = [];
 let medicineData = [];
 
-// Function to add medicine items to the cart
 function addToCart(index) {
   const medicine = medicineData[index];
-  cart.push(medicine);
+  const existingItem = cart.find(item => item.Name === medicine.Name);
+
+  if (existingItem) {
+    existingItem.Quantity += 1;
+  } else {
+    cart.push({ ...medicine, Quantity: 1 });
+  }
+
   updateCartUI();
 }
 
-// Function to update the cart UI
 function updateCartUI() {
   cartItems.innerHTML = "";
   let cartTotal = 0;
@@ -28,19 +33,17 @@ function updateCartUI() {
     const cartItem = document.createElement("li");
     cartItem.innerHTML = `
       <span>${medicine.Name}</span><br />
-      <span>$${medicine.Price}</span><br />
-      <span>${medicine.Description}</span><br />
+      <span>Quantity: ${medicine.Quantity}</span><br />
+      <span>Total Price : $${medicine.Price * medicine.Quantity}</span><br />
       <p>Pharma Store: ${medicine.PName}</p>
-
       <button class="remove-button" data-index="${index}">Remove</button>
     `;
     cartItems.appendChild(cartItem);
-    cartTotal += parseInt(medicine.Price);
+    cartTotal += medicine.Price * medicine.Quantity;
   });
 
   cartTotalSpan.textContent = cartTotal;
 
-  // Add event listeners to remove items from the cart
   const removeButtons = document.querySelectorAll(".remove-button");
   removeButtons.forEach((button) => {
     button.addEventListener("click", (event) => {
@@ -50,6 +53,7 @@ function updateCartUI() {
     });
   });
 }
+
 
 // Function to display medicine items based on user selections
 function displayMedicineItems() {
@@ -88,11 +92,9 @@ function displayMedicineItems() {
   });
 }
 
-// Event listeners for user interactions
 searchInput.addEventListener("input", displayMedicineItems);
 filterSelect.addEventListener("change", displayMedicineItems);
 
-// Fetch and display medicine items on page load
 const initialize = async () => {
   medicineData = await getMedicine();
   displayMedicineItems();
