@@ -14,7 +14,7 @@ let medicineData = [];
 
 function addToCart(index) {
   const medicine = medicineData[index];
-  const existingItem = cart.find(item => item.Name === medicine.Name);
+  const existingItem = cart.find((item) => item.Name === medicine.Name);
 
   if (existingItem) {
     existingItem.Quantity += 1;
@@ -36,6 +36,7 @@ function updateCartUI() {
       <span>Quantity: ${medicine.Quantity}</span><br />
       <span>Total Price : $${medicine.Price * medicine.Quantity}</span><br />
       <p>Pharma Store: ${medicine.PName}</p>
+      <p>MedicineID: ${medicine.MedicineID}</p>
       <button class="remove-button" data-index="${index}">Remove</button>
     `;
     cartItems.appendChild(cartItem);
@@ -54,7 +55,6 @@ function updateCartUI() {
   });
 }
 
-
 // Function to display medicine items based on user selections
 function displayMedicineItems() {
   const searchTerm = searchInput.value.toLowerCase();
@@ -65,7 +65,8 @@ function displayMedicineItems() {
   medicineData.forEach((medicine, index) => {
     if (
       (searchTerm === "" || medicine.Name.toLowerCase().includes(searchTerm)) &&
-      (selectedCategory === "" || medicine.Category.toLowerCase() === selectedCategory)
+      (selectedCategory === "" ||
+        medicine.Category.toLowerCase() === selectedCategory)
     ) {
       const medicineItem = document.createElement("div");
       medicineItem.classList.add("medicine-item");
@@ -101,3 +102,24 @@ const initialize = async () => {
 };
 
 initialize();
+
+const postCartItems = async () => {
+  const response = await fetch("http://localhost:3000/api/bill", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ cart }),
+  });
+
+  if (!response.ok) {
+    console.error("Failed to post cart items to server");
+  } else {
+    const data = await response.json();
+    console.log(data);
+    cart = [];
+    updateCartUI();
+  }
+};
+
+document.getElementById("rzp-button1").addEventListener("click", postCartItems);
