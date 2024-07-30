@@ -1,18 +1,17 @@
 import mysql from "mysql2";
-import express, { json } from "express";
+import express from "express";
 import cors from "cors";
 import { getMedicineDetails, getRandomNumber } from "../db/helper.js";
 const app = express();
-const PORT = 3000;
 
 app.use(cors());
 app.use(express.json());
 
-const DB_URI =
-  "mysql://avnadmin:AVNS_Wq9z1CjMWf0xkkox-R4@mysql-1835da40-ak0704176-bdd5.c.aivencloud.com:16165/pharmacy_management_system";
+const PORT = 3000;
+const DB_URI = "password"; // removed cloud db connection string
 export const connection = mysql.createConnection(DB_URI);
 
-connection.connect((err) =>
+connection.connect(err =>
   err ? console.error("Connection error:", err) : console.log("DB CONNECTED")
 );
 
